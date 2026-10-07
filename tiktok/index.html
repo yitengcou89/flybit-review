@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok 免拔卡使用教程（2026-10）：安卓/iOS 三种方法对比，附「无网络连接」根因排查</title>
+<meta name="description" content="TikTok 国内免拔卡使用教程：安卓 Shizuku+Nrfr 改 SIM 国家码、iPhone 美区 ID 下载、破解版风险说明。装好后还是显示无网络连接？按命中率排查香港节点、IP 纯净度、晚高峰拥堵三个根因。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Shizuku 和 Nrfr 安全吗？","acceptedAnswer":{"@type":"Answer","text":"都是开源多年的项目，代码公开可查（Shizuku GitHub 约 1.6 万星，Nrfr 约 4.5 千星），比任何改包 APK 都透明。"}},
+    {"@type":"Question","name":"改完国家码要重启吗？会伤 SIM 卡吗？","acceptedAnswer":{"@type":"Answer","text":"不用重启，也不伤卡。Nrfr 改的是系统读取结果的接口层（CarrierConfig），不动 SIM 本身，还原用 App 内的还原键，随时可逆。"}},
+    {"@type":"Question","name":"免拔卡都设置好了为什么还刷不出来？","acceptedAnswer":{"@type":"Answer","text":"九成是网络线路问题：先确认节点不是香港（TikTok 不向香港提供服务），再排查 IP 是否机房中转、晚高峰是否拥堵，方法见本文第五节。"}},
+    {"@type":"Question","name":"TikTok 注册用什么号码？","acceptedAnswer":{"@type":"Answer","text":"大陆 +86 手机号注册不上，这是平台规则不是方法问题。用 Google 账号走 OAuth 最省事，或者 GVoice、海外实卡。"}},
+    {"@type":"Question","name":"TikTok 和抖音能装在同一部手机吗？","acceptedAnswer":{"@type":"Answer","text":"能。同一部手机两个 App 并存互不影响，这正是免拔卡方案最大的好处，不需要备用机。"}},
+    {"@type":"Question","name":"还有哪些 App 也检测 SIM 卡国家码？","acceptedAnswer":{"@type":"Answer","text":"例如 Samsung Health 首次激活也会检查国家码，改法同理（Guise/Nrfr 都能处理）。"}},
+    {"@type":"Question","name":"破解版 TikTok 会被封号吗？","acceptedAnswer":{"@type":"Answer","text":"有风险且看脸，商用风控收紧趋势明显。别拿经营号、带货号冒险，商用请走官方版+改码方案。"}},
+    {"@type":"Question","name":"新人从零开始，一步到位的操作顺序？","acceptedAnswer":{"@type":"Answer","text":"先选好线路并连通 → Google 账号登录备用 → Shizuku+Nrfr 改码 → 装正版 TikTok → 谷歌账号登录。线路没通之前别折腾后面任何一步，全是白装。"}}
+  ]
+}
+</script>
+<style>
+  :root{
+    --blue:#2563eb; --blue-dark:#1e40af; --ink:#111827; --ink-2:#374151; --ink-3:#6b7280;
+    --line:#e5e7eb; --bg:#ffffff; --bg-2:#f8fafc; --green:#059669; --red:#dc2626;
+    --card:#ffffff; --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#e5e7eb; --ink-2:#cbd5e1; --ink-3:#94a3b8; --line:#334155; --bg:#0f172a; --bg-2:#1e293b; --card:#1e293b; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.8;font-size:16px}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  header.site{border-bottom:1px solid var(--line);background:var(--card)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;color:var(--ink);font-size:17px}
+  .brand span{color:var(--blue)}
+  nav a{color:var(--ink-2);font-size:14px;margin-left:16px}
+  h1{font-size:25px;line-height:1.45;margin:34px 0 8px}
+  .meta{color:var(--ink-3);font-size:13px;margin-bottom:18px}
+  .meta i{font-style:normal;margin-right:14px}
+  h2{font-size:20px;border-bottom:2px solid var(--line);padding-bottom:8px;margin:40px 0 16px}
+  h3{font-size:16.5px;margin:24px 0 10px}
+  p{margin:11px 0}
+  ul{margin:8px 0;padding-left:22px}
+  li{margin:6px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:14px 0}
+  .notice{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--blue);
+          border-radius:var(--radius);padding:14px 16px;font-size:13.5px;color:var(--ink-2);margin:18px 0}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+  th{background:var(--bg-2);font-weight:600;white-space:nowrap}
+  .steps{counter-reset:step}
+  .steps li{list-style:none;position:relative;padding-left:36px;margin:14px 0}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:2px;
+      width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;
+      display:flex;align-items:center;justify-content:center}
+  code{background:var(--bg-2);border:1px solid var(--line);border-radius:5px;padding:1px 7px;font-size:13.5px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;font-weight:600;font-size:15px}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark);color:#fff;text-decoration:none}
+  .cta{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center;margin:30px 0}
+  .cta p{color:var(--ink-2);font-size:14px}
+  .faq dt{font-weight:700;margin-top:16px}
+  .faq dd{margin:4px 0 0;color:var(--ink-2)}
+  footer.site{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 40px;color:var(--ink-3);font-size:13px}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">机场<span>实测站</span></div>
+    <nav><a href="#fangfa">方法</a><a href="#wangluo">网络排查</a><a href="#faq">FAQ</a><a href="/">线路实测</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>TikTok 免拔卡使用教程（2026-10 更新）：安卓/iOS 三种方法对比，附「无网络连接」根因排查</h1>
+  <div class="meta">
+    <i>更新：2026-10</i><i>阅读约 9 分钟</i><i>三种方法 + 8 条 FAQ</i>
+  </div>
+
+  <p><strong>先说结论</strong>：能正常用，而且不用拔卡。2026 年 10 月验证，国内正常家宽环境下三种方法都通：</p>
+  <ol>
+    <li><strong>不想折腾</strong> → 安卓 Shizuku + Nrfr 修改 SIM 国家码（免 root，正版 TikTok，约 20 分钟）；</li>
+    <li><strong>就想马上刷上</strong> → 破解版 APK（5 分钟装好，风险自负，见第三节）；</li>
+    <li><strong>iPhone</strong> → 美区 Apple ID 下载 + 小火箭/Stash 分流规则（免拔卡官方版）。</li>
+  </ol>
+
+  <div class="notice">三种方法共同的前提只有一个：<strong>稳定的网络环境</strong>。90% 的「装好了还是显示无网络连接」，原因都在网络这一关，不在 App——网上教程基本不讲或一句带过，本文第五节专门讲这一关。</div>
+
+  <h2 id="yuanyin">一、为什么国内打开 TikTok 一直转圈？三个原因</h2>
+  <ol>
+    <li><strong>网络层不通</strong>：TikTok 服务器在国内直连不可达，这是大家熟悉的那部分；</li>
+    <li><strong>SIM 卡检测</strong>：安卓版 TikTok 会读取 SIM 卡国家码，识别到 +86（大陆运营商）就直接显示「无网络连接」。注意这个检测在 App 内部——<strong>网络通了也照样黑屏</strong>，这就是很多人换了一堆节点还是刷不出来的真正原因；</li>
+    <li><strong>iOS 不查 SIM 但查不到 App</strong>：iPhone 不给 App 读 SIM 的权限，所以不用改卡，但大陆区 Apple ID 在 App Store 搜不到 TikTok，需要先有个美区 Apple ID。</li>
+  </ol>
+  <p>所以安卓的完整条件是「网络 + 假装在海外」两件都要满足，iOS 的条件是「网络 + 美区账号」。</p>
+
+  <h2 id="fangfa">二、方法一（推荐）：Shizuku + Nrfr，不用拔卡不用 root</h2>
+  <p>原理一句话：Shizuku 负责借给你系统级权限（开源多年的老工具），Nrfr 用这个权限把系统读到的 SIM 国家码从 +86 改成 +1（美国）。只改系统读取结果，不接触 SIM 卡本身，随时一键还原。</p>
+  <p>步骤（安卓通用，小米/红米有一步额外设置，会标出来）：</p>
+  <ol class="steps">
+    <li>设置 → 关于手机 → 连点「版本号」7 次打开开发者模式（有的机型 5 次）；</li>
+    <li>开发者选项里打开「无线调试」；</li>
+    <li>点「使用配对码配对设备」——<strong>先点这个</strong>，通知栏才会出现配对入口；
+      <ul><li>小米/红米注意：要把通知样式改成「原生样式」，否则配对码输不进去；</li></ul></li>
+    <li>通知栏输入配对码，配对成功后启动 Shizuku；</li>
+    <li>打开 Nrfr 点授权。授权后如果显示「已授权 0 个应用」，把 Shizuku 杀掉重开就好；</li>
+    <li>Nrfr 里选你的 SIM 卡 → 国家码选美国 → 修改。立即生效，不用重启。</li>
+  </ol>
+  <p>装好 Google Play 版（包名 <code>com.zhiliaoapp.musically</code>）的 TikTok，连好网络，直接就能用。注册/登录建议直接用 Google 账号——大陆手机号是注册不上的，这是平台规则，不是方法问题。</p>
+
+  <h2>三、方法二：破解版，5 分钟但风险自负</h2>
+  <p>Telegram 频道（TikTokModCloud）持续更新魔改版：去广告、去水印、无视区域检测，装完即用。但有三件事要说清楚：</p>
+  <ol>
+    <li>第三方改包 App 没法验证里面夹没夹带其他东西，<strong>别拿它登录主力账号</strong>，要用请注册小号；</li>
+    <li>这类版本会弹强制更新，只能回频道下新版；</li>
+    <li>商务用途（挂号运营、带货）<strong>不要用破解版</strong>——风控对改包客户端的识别越来越常见，商用走方法一。</li>
+  </ol>
+
+  <h2>四、iPhone 上怎么装</h2>
+  <ol>
+    <li>注册一个美区 Apple ID（地区选美国，可以不绑卡），App Store 切区下载 TikTok；</li>
+    <li>免拔卡的分流规则：Shadowrocket / Stash 用户可以直接用现成的 TikTok-Unlock 规则包（GitHub 搜 blackmatrix7/ios_rule_script），原理是在分流层把 SIM/区域相关的请求一起代理掉；</li>
+    <li>「旧版在线安装」那类站（jiesuo.tk 等）2026 年时灵时不灵，不作主推。</li>
+  </ol>
+
+  <h2 id="wangluo">五、换了好几个节点还是「无网络连接」？——网络这一关怎么过</h2>
+  <p>这一节就是多数教程都缺的那块。四个排查点，按命中率排序：</p>
+  <div class="card">
+    <h3>1. 你的节点在香港</h3>
+    <p>TikTok 不向香港提供服务，香港节点等于人还在墙内，直接「无网络」。换美国、日本、新加坡。</p>
+    <h3>2. 你的节点是数据中心 IP（中转线路）</h3>
+    <p>TikTok 对 IP 身份有风控：机房 IP 是「批量访问者」，轻则黑屏无网络，重则登录时给你 <code>Too many attempts. Try again later</code>。同样是能连通的节点，「原生 IP / 住宅级线路」和「共享中转 IP」的体验差一整个量级——刷半天刷不出来的，八成是后者。</p>
+    <h3>3. 晚高峰线路拥堵</h3>
+    <p>白天一切正常、晚上 8 点后突然「无网络连接」，不是手机的问题，是这条线路晚高峰在排队。判断方法很简单：<strong>换一条线路马上恢复 = 线路问题</strong>。TikTok 对网络稳定性的要求和 ChatGPT、Codex 是一个级别——晚高峰掉一次，带货直播就断一次。</p>
+    <h3>4. Too many attempts 频率限制</h3>
+    <p>登录被限了别连续重试，等几小时，期间把节点换到原生 IP 线路再登录，成功率完全不同。</p>
+  </div>
+  <p>总结这段：<strong>App 这关（SIM/区域）用第二节的方法一次解决；网络这关选对线路才能长期稳定</strong>，两关都过，就不存在「间歇性无网络」这种玄学。</p>
+
+  <div class="cta">
+    <p>我目前用了四个多月、晚高峰实测数据齐全（丢包率 / 流媒体解锁 / IP 纯净度检测）的线路，都记录在评测页里：</p>
+    <a class="btn btn-primary" href="/" target="_blank">看线路实测数据 →</a>
+    <a class="btn" style="border:1px solid var(--line);margin-left:10px" href="https://www.fastfastfast.buzz/#/register?code=hLDMBPb9" target="_blank" rel="nofollow noopener">直接注册（送 1 天试用）</a>
+  </div>
+
+  <h2 id="faq">六、FAQ（挑问得最多的答）</h2>
+  <dl class="faq">
+    <dt>Shizuku 和 Nrfr 安全吗？</dt>
+    <dd>都是开源多年的项目，代码公开可查（Shizuku GitHub 约 1.6 万星、Nrfr 约 4.5 千星），比任何改包 APK 都透明。</dd>
+    <dt>改完要重启吗？会伤 SIM 卡吗？</dt>
+    <dd>不用重启不伤卡。Nrfr 改的是系统读取结果的接口层（CarrierConfig），不动 SIM 本身，还原用 App 内的还原键。</dd>
+    <dt>免拔卡都设置好了，为什么还刷不出来？</dt>
+    <dd>九成是网络线路问题，按第五节四点排查，先查是不是香港节点。</dd>
+    <dt>注册用什么号码？</dt>
+    <dd>大陆 +86 不行。用 Google 账号走 OAuth 最省事，或者 GVoice、海外实卡。</dd>
+    <dt>TikTok 和抖音能共存吗？</dt>
+    <dd>能，同一部手机两个 App 并存互不影响——这是免拔卡方案最大的好处。</dd>
+    <dt>还有哪些 App 也检测 SIM？</dt>
+    <dd>比如 Samsung Health 首次激活也查国家码，改法同理。</dd>
+    <dt>破解版会被封号吗？</dt>
+    <dd>看脸，且商用风控收紧趋势明显，别拿经营号冒险。</dd>
+    <dt>新人从零开始，一步到位的操作顺序？</dt>
+    <dd>先选好线路并连通 → Google 账号登录备用 → Shizuku+Nrfr 改码 → 装正版 TikTok → 谷歌账号登录。<strong>线路没通之前别折腾后面任何一步，全是白装。</strong></dd>
+  </dl>
+
+  <div class="notice"><strong>新人注册两步走</strong>：邀请码栏填 <code>hLDMBPb9</code>（注册页），下单时优惠码栏填 <code>flybit</code>（自动九折）。</div>
+
+  <h2>七、资源汇总</h2>
+  <table>
+    <tr><th>资源</th><th>地址</th></tr>
+    <tr><td>Shizuku（开源）</td><td>github.com/RikkaApps/Shizuku</td></tr>
+    <tr><td>Nrfr（开源）</td><td>github.com/Ackites/Nrfr</td></tr>
+    <tr><td>TikTok-Unlock 分流规则</td><td>github.com/blackmatrix7/ios_rule_script</td></tr>
+    <tr><td>官方 TikTok 包名</td><td>com.zhiliaoapp.musically</td></tr>
+    <tr><td>本文网络环节的线路实测数据</td><td><a href="/">flybit-review.pages.dev（本站首页）</a></td></tr>
+  </table>
+
+  <footer class="site">
+    <p>2026-10-07 整理验证。方法类步骤如有变动（Android 版本差异 / 频道更新），以工具官方文档为准。</p>
+  </footer>
+</main>
+</body>
+</html>
