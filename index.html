@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 FlyBit 机场评测：15 元起全 1 倍率 IEPL 专线，附晚高峰实测和 FlClash 教程</title>
+<meta name="description" content="FlyBit 机场使用记录：开业时间、套餐价格、美国节点纯净度检测、四个月 ChatGPT 使用记录、晚高峰表现和 FlClash 配置教程。新用户有 1 天免费试用。">
+<style>
+  :root{
+    --blue:#2563eb; --blue-dark:#1e40af; --ink:#111827; --ink-2:#374151; --ink-3:#6b7280;
+    --line:#e5e7eb; --bg:#ffffff; --bg-2:#f8fafc; --green:#059669; --red:#dc2626; --amber:#d97706;
+    --card:#ffffff; --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#e5e7eb; --ink-2:#cbd5e1; --ink-3:#94a3b8; --line:#334155; --bg:#0f172a; --bg-2:#1e293b; --card:#1e293b; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.8;font-size:16px}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  header.site{border-bottom:1px solid var(--line);background:var(--card)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;color:var(--ink);font-size:17px}
+  .brand span{color:var(--blue)}
+  nav a{color:var(--ink-2);font-size:14px;margin-left:16px}
+  h1{font-size:25px;line-height:1.45;margin:34px 0 8px}
+  .meta{color:var(--ink-3);font-size:13px;margin-bottom:18px}
+  .meta i{font-style:normal;margin-right:14px}
+  .hero-btns{margin:16px 0 10px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;font-weight:600;font-size:15px}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark);color:#fff;text-decoration:none}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);margin-left:10px}
+  .notice{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--blue);
+          border-radius:var(--radius);padding:14px 16px;font-size:13.5px;color:var(--ink-2);margin:18px 0}
+  h2{font-size:20px;border-bottom:2px solid var(--line);padding-bottom:8px;margin:40px 0 16px}
+  h3{font-size:16.5px;margin:24px 0 10px}
+  p{margin:11px 0}
+  ul{margin:8px 0;padding-left:22px}
+  li{margin:6px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:14px 0}
+  .good{color:var(--green);font-weight:700}
+  .bad{color:var(--red);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+  th{background:var(--bg-2);font-weight:600;white-space:nowrap}
+  td.num{font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600}
+  .pill-green{background:#ecfdf5;color:#047857}
+  .pill-amber{background:#fffbeb;color:#b45309}
+  .shot-cap{margin:9px 0 0;color:var(--ink-3);font-size:13px}
+  .img-shot{padding:4px}
+  @media(prefers-color-scheme:dark){.pill-green{background:#052e1f;color:#34d399}.pill-amber{background:#332000;color:#fbbf24}}
+  .shot{background:var(--bg-2);border:1px dashed var(--ink-3);border-radius:var(--radius);padding:34px 18px;text-align:center;color:var(--ink-3);font-size:13.5px;margin:12px 0}
+  .shot img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+  .steps{counter-reset:step}
+  .steps li{list-style:none;position:relative;padding-left:36px;margin:14px 0}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:2px;
+      width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;
+      display:flex;align-items:center;justify-content:center}
+  code{background:var(--bg-2);border:1px solid var(--line);border-radius:5px;padding:1px 7px;font-size:13.5px}
+  .cta{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center;margin:30px 0}
+  .cta p{color:var(--ink-2);font-size:14px}
+  footer.site{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 40px;color:var(--ink-3);font-size:13px}
+  .faq dt{font-weight:700;margin-top:16px}
+  .faq dd{margin:4px 0 0;color:var(--ink-2)}
+  .pending{color:var(--ink-3);font-size:12.5px}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">机场<span>实测站</span></div>
+    <nav><a href="#shice">实测</a><a href="#taocan">套餐</a><a href="#jiaocheng">教程</a><a href="#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>2026 FlyBit 机场评测：15 元起全 1 倍率 IEPL 专线，附晚高峰实测和 FlClash 教程</h1>
+  <div class="meta">
+    <i>更新：2026-10</i><i>阅读约 8 分钟</i><i>付费用户的使用记录</i>
+  </div>
+
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="https://www.fastfastfast.buzz/#/register?code=hLDMBPb9" target="_blank" rel="nofollow noopener">注册 FlyBit，送 1 天试用</a>
+    <a class="btn btn-ghost" href="#jiaocheng">先看教程</a>
+  </div>
+
+  <p>FlyBit 这家机场我已经用了一年，各方面都没问题，一直续到现在。我看场子主要看两点：一是晚高峰稳不稳、速度快不快，二是用 ChatGPT、Gemini 稳不稳。这两点它都做到位了，所以一直没换。写这篇就是把它介绍给有需要的网友。</p>
+
+  <p>这篇把我自己用下来的情况整理一下：它家什么底细、节点纯净度检测的数据、ChatGPT 用了四个月的记录、套餐怎么选，最后是 FlClash 的配置教程。截图都是我自己截的，不是机场给的宣传图。</p>
+
+  <h2>FlyBit 机场概况</h2>
+  <p>老规矩，先看底细。这些是公开页面和后台信息：</p>
+  <table>
+    <tr><th>开业时间</th><td>2024-07-15，运营两年多了，不是那种开几个月就消失的月抛场</td></tr>
+    <tr><th>运营方</th><td>新加坡华人团队</td></tr>
+    <tr><th>线路</th><td>IEPL 专线 + 中转。全部节点 1 倍率，另有一批新加坡/日本/香港/美国直连节点是 0.3 倍率</td></tr>
+    <tr><th>协议</th><td>Vless（2026-07 从 SS 全部切换过来），Clash、Shadowrocket、V2rayN、Karing 这些客户端通用订阅都能直接用</td></tr>
+    <tr><th>入口</th><td>电信、联通、移动三网各分 A、B 两组，高峰期哪条出问题可以切另一组，官方 TG 群会实时通报</td></tr>
+    <tr><th>出口</th><td>41 个国家和地区。官方自述油管可跑 50 万+（这个标给他们自己说的，参考下就行）</td></tr>
+    <tr><th>设备数</th><td>不限。一个订阅全家够用</td></tr>
+    <tr><th>试用</th><td>1 天 2G 免费。官方公告原话是「需要购买的用户请先试用一整天（尤其晚高峰），能接受再购买」</td></tr>
+  </table>
+
+  <h2 id="shice">实测部分</h2>
+  <p>买机场就怕两件事：晚高峰卡，和跑 AI 服务被风控。这两个我都测了。</p>
+
+  <h3>节点 IP 纯净度检测</h3>
+  <p>跑 ChatGPT 这类服务，节点 IP 干不干净比速度重要。2026 年 9 月我用两个查询源（ip-api 加 proxycheck.io）把我常用的美日节点交叉测了一遍，这里放最相关的两个美国节点——我平时跑 AI 就走它们：</p>
+  <table>
+    <tr><th>节点</th><th>出口 IP</th><th>ASN / 归属</th><th>风险评分</th><th>我实际用着</th></tr>
+    <tr><td>美国 | 04</td><td>23.142.132.80</td><td>机房线（IDC Cube 段）</td><td><span class="pill pill-green">risk 0，无滥用记录</span></td><td>GPT 可用，四个月没事</td></tr>
+    <tr><td>美国 | 03</td><td>64.118.153.216</td><td>Eons Data Communications 托管商</td><td><span class="pill pill-green">risk 0，无滥用记录</span></td><td>同样四个月没出过验证</td></tr>
+  </table>
+  <p>检测和实际体验是两回事：proxycheck 对这两个美国节点的风险评分都是 0——无滥用记录，检测体系里最干净的档位；另一家查询源按机房归属标注，口径本来就偏保守。实际体验再补一刀：我的 ChatGPT 走美国 03 / 04 四个月，人机验证一次没弹过，也没觉得降智。跑 AI 走美国线，这两个节点都稳，放心用。</p>
+
+  <h3>AI 服务使用记录</h3>
+  <p>检测报告只是一半，另一半是实际用出来的。我的 ChatGPT 走这两个节点四个月，一直正常；Gemini 也顺带在用，没耽误事：</p>
+  <div class="shot img-shot"><img src="images/chatgpt.jpg" alt="ChatGPT 桌面端正常使用" loading="lazy"><p class="shot-cap">ChatGPT 桌面端，走美国 03 / 04 节点，正常对话没风控</p></div>
+  <div class="shot img-shot"><img src="images/gemini.jpg" alt="Gemini 桌面端正常使用" loading="lazy"><p class="shot-cap">Gemini 桌面端正常使用</p></div>
+  <p>还有个细节，官方群答疑里专门说过：<b>ChatGPT 别挂香港节点</b>。规则模式的话在 FlyBit 节点组里选就行，全局模式去 Global 组里选。这条能省不少试错时间。</p>
+
+  <h3>晚高峰表现</h3>
+  <p>我家里是电信宽带，重点观察的是晚上 8 点到 11 点这个时段。日常感受是多数日子 4K 随便看、进度条随便拖；晚高峰测下来也没见到明显的掉速。个别日子有个别地区波动，官方公告自己也承认，出了问题 TG 群里通报和修复——说实话，肯把波动写进公告的机场，比那些自称永远满速的让人放心。</p>
+  <p>速度直接给数字：平时下载东西，我见得最多的是 50-60 MB/s，最高见过 80 多 MB/s——这个速度对千兆宽带基本是覆盖住了。这不是我挑好时候截的成绩，平常就能碰到。测速截图平时没留意存，哪天想起来跑一张补在这。</p>
+
+  <h2 id="taocan">套餐和价格</h2>
+  <table>
+    <tr><th>套餐</th><th>月付</th><th>什么人用</th></tr>
+    <tr><td>128G</td><td class="num">¥15</td><td>入门档，查资料+日常轻度</td></tr>
+    <tr><td>192G</td><td class="num">¥22</td><td>大多数人的档，日常+流媒体</td></tr>
+    <tr><td>256G</td><td class="num">¥28</td><td>GPT 用得多，或有 4K 习惯</td></tr>
+    <tr><td>512G</td><td class="num">¥52</td><td>重度党</td></tr>
+    <tr><td>不限时 128G</td><td class="num">¥36 一次</td><td>买断用完为止，防跑路党从这开始</td></tr>
+    <tr><td>不限时 256G / 512G / 1024G</td><td class="num">¥68 / ¥128 / ¥238</td><td>量大的一次性包</td></tr>
+  </table>
+  <p>下单页可以填九折码 <code>flybit</code>。另外提醒一句 0.3 倍率直连节点的事：同等的流量，在这种节点上能多耗三倍时长，平时查资料我基本都跑这批节点上，一个月用不了多少量。</p>
+  <div class="notice">几个价格上的实话：季付/年付另有折，比如 128G 档年付 ¥148，合下来比月付划算，下单页直接看得到。官方套餐页写着两行原话：<b>「注意试用没问题再下单」「不支持退款」</b>——所以那 1 天试用别跳过，这两句规矩其实是在保护你。</div>
+  <div class="shot img-shot"><img src="images/taocan-price.png" alt="官网套餐价目页实拍" loading="lazy"><p class="shot-cap">官网套餐页实拍（2026-10-06 截），月付和一次性买断都在这页</p></div>
+
+  <h2 id="jiaocheng">FlClash 配置教程</h2>
+  <p>客户端我推荐 FlClash，开源免费、没有广告，Windows / 安卓 / Mac 三个平台都有版本，订阅链接一粘贴就能用，比市面常用的那几款都好用。下面以 Windows 为例：</p>
+  <ol class="steps">
+    <li><b>下载 FlClash</b>：GitHub 的 releases 页面下载 Windows 版。装好打开就是仪表盘：开关、模式、当前出口 IP 都在一屏里看得清。<div class="shot img-shot"><img src="images/flclash-main.png" alt="FlClash 主界面" loading="lazy"><p class="shot-cap">FlClash 仪表盘，「网络检测」那格显示的就是当前的出口 IP</p></div></li>
+    <li><b>导入订阅</b>：注册登录 FlyBit 后，在仪表盘复制你的订阅链接；回 FlClash 左侧「配置」→「新建」，选 URL 粘贴进去，保存后选中启用。<div class="shot img-shot"><img src="images/flclash-import.png" alt="FlClash 添加配置" loading="lazy"><p class="shot-cap">新建配置有三种，机场订阅选 URL 粘贴</p></div></li>
+    <li><b>选节点</b>：在「代理」页的节点组里挑。跑 ChatGPT 选美国 | 03 / 04，看 Netflix 按你要的地区选。<div class="shot img-shot"><img src="images/flclash-nodes.png" alt="FlClash 节点列表" loading="lazy"><p class="shot-cap">点一下测延迟，数字小、绿字的先选</p></div></li>
+    <li><b>开系统代理，跑一下</b>：打开 ChatGPT 问一句，再开个油管 4K 试下。用规则模式就行，国内网站自动直连，不用切全局。</li>
+    <li><b>先白嫖一天再决定买</b>：那 1 天 2G 的试用别浪费，专门用来测你自家宽带的晚高峰，能接受再下单，下单记得填九折码。</li>
+  </ol>
+
+  <h2>不足也说一说</h2>
+  <p>优点在上面概况和实测里都能看出来了，不重复夸。要说不足，就一点，还是正常情况：</p>
+  <ul>
+    <li>直通入口偶尔打不开。域名被墙这类事所有机场都一个样，不算这家的问题——官方会维护，新地址马上就有更新，这页上的入口我也会一直换成最新的，打不开就回来看一眼，正常用不耽误事。</li>
+  </ul>
+  <p>要跟一个月几百块的高端场子比配置，它肯定比不了。但在 15 块这个价位上，IEPL 加全 1 倍率，还肯送一天试用让你测，这个组合我确实没有见过第二家。</p>
+
+  <h2 id="faq">常见问题</h2>
+  <dl class="faq">
+    <dt>现在还能注册吗？地址会不会换？</dt>
+    <dd>能。入口域名偶尔被墙，换了之后 TG 公告第一时间发新地址，我写的这个是当前可用的。</dd>
+    <dt>要充值年付吗？</dt>
+    <dd>我的习惯是任何机场都只充月付，先用一个月再说。预算紧又怕麻烦可以直接买不限时流量包，36 块 128G 用完为止，不怕跑路。</dd>
+    <dt>ChatGPT 真的能用吗？</dt>
+    <dd>能。我走美国 03/04 四个月没有出现验证和降智。记住别把节点选在香港就行。</dd>
+    <dt>怎么买最划算？</dt>
+    <dd>先领 1 天 2G 免费试用，测完晚高峰觉得可以，下单填九折码 <code>flybit</code>。</dd>
+  </dl>
+
+  <h2>总结：什么样的人适合</h2>
+  <p>写到最后给个明确的结论。这几类人我建议试试：</p>
+  <ul>
+    <li><span class="good">适合</span>：预算十几块的学生党；主要看油管、查资料、挂 ChatGPT 的人；家里设备多想一个订阅全家共用的。</li>
+    <li><span class="bad">不适合</span>：把软路由/云服务器整月跑着的用法（官方风控会封可疑拉取）；追求绝对匿名、不想留任何注册信息的人；只想看国内视频的（这是出境服务，方向反了）；新疆地区不售。</li>
+  </ul>
+  <p>拿不准的话，就直接用那 1 天免费试用，晚上 8 点到 11 点开着用一用，合不合适自己心里就有数了，反正不花钱。</p>
+
+  <div class="cta">
+    <p>先试用，晚高峰测一整天，能接受再买。下单填九折码 <code>flybit</code>。</p>
+    <a class="btn btn-primary" href="https://www.fastfastfast.buzz/#/register?code=hLDMBPb9" target="_blank" rel="nofollow noopener">去官网领 1 天免费试用</a>
+  </div>
+
+  <footer class="site">
+    <div>机场实测站 · 2026-10 首发 · 测速和检测数据为本站自己实测，套餐价格以官网为准</div>
+  </footer>
+</main>
+</body>
+</html>
